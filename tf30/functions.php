@@ -184,3 +184,174 @@ function my_get_post_tags( $id = 0 ) {
         }
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------
+
+/**
+* ウィジェットの登録
+*
+* @codex http://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/register_sidebar
+*/
+function my_widget_init() {
+    register_sidebar(
+        array(
+            'name' => 'サイドバー', //表示するエリア名
+            'id' => 'sidebar', //id
+
+            // %1$s : ウィジェットの名前＋番号
+            // %2$s : ウィジェットの名前
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget' => '</div>',
+            'before_title' => '<div class="widget-title">',
+            'after_title' => '</div>',
+        )
+    );
+}
+add_action( 'widgets_init', 'my_widget_init' );
+
+//-------------------------------------------------------------------------------------------------------------------
+
+/**
+* 記事IDを投稿画面に表示させる
+*
+*/
+
+function add_posts_columns_postid($columns) { 
+    $columns['postid'] = 'ID';
+    return $columns;
+}
+
+function add_posts_columns_postid_row($column_name, $post_id) {
+    if( 'postid' == $column_name ) {
+        echo $post_id;
+    }
+ }
+
+add_filter( 'manage_posts_columns', 'add_posts_columns_postid' );
+add_action( 'manage_posts_custom_column', 'add_posts_columns_postid_row', 10, 2 );
+
+//-------------------------------------------------------------------------------------------------------------------
+
+/**
+* 閲覧者数を〇〇views表記にする
+*
+*/
+
+function remove_posted_on( $output ){
+    return str_replace("ビュー", " views", $output);
+}
+
+add_filter( 'wpp_post', 'remove_posted_on');
+
+//-------------------------------------------------------------------------------------------------------------------
+
+/**
+* カスタムフィールドを使ってアクセス数を取得する（特定記事のアクセス数確認用）
+*
+* @param integer $id 投稿id.
+* @return void
+*/
+//アクセス数を取得
+function get_post_views( $id = 0 ){
+    global $post;
+    //引数が渡されなければ投稿IDを見るように設定
+    if ( 0 === $id ) {
+        $id = $post->ID;
+    }
+    $count_key = 'view_counter';
+
+    // get_post_meta - カスタムフィールド情報を取得する
+    // mixed get_post_meta( int $post_id [ , string $key='' [ , bool $single = false ] ] )
+    // $post_id : 投稿ID
+    // $key     : カスタムフィールドの名前
+    // $single  : 単一のカスタムフィールドの値を取得する場合はtrue
+    //            複数のカスタムフィールドの値を取得する場合はfalseを指定
+    // 返り値    : パラメータ$singleがtrueの場合は、投稿データにパラメータ$keyの名前で登録されている1番目のカスタムフィールドの値を文字列として返す。
+    //            falseの場合は、投稿データにパラメータ$keyの名前で登録されているすべてのカスタムフィールドの値を配列で返す。
+    $count = get_post_meta($id, $count_key, true);
+
+    if($count === ''){
+
+        // delete_post_meta - カスタムフィールド情報を削除する
+        // bool delete_post_meta( int $post_id, string $meta_key [ , mixed $meta_value = '' ] )
+        // $post_id    : 投稿ID
+        // $meta_key   : カスタムフィールドの名前
+        // $meta_value : カスタムフィールドの値（省略時は''）。同じ名前のカスタムフィールドが複数登録されている場合は、この値によって区別する。
+        // 返り値       : カスタムフィールド情報を削除できた場合はtrue、削除できなかった場合はfalseを返す。
+        delete_post_meta($id, $count_key);
+
+        // add_post_meta - カスタムフィールド情報を追加する
+        // bool add_post_meta( int $post_id, string $meta_key, mixed $meta_value [ , bool $unique = false ] )
+        // $post_id    : 投稿ID
+        // $meta_key   : カスタムフィールドの名前
+        // $meta_value : カスタムフィールドの値
+        // $unique     : ユニークにする場合はtrue、ユニークにしない場合はfalseを指定（省略時）。
+        add_post_meta($id, $count_key, '0');
+    }
+    return $count;
+}
+
+/**
+* アクセスカウンター
+*
+* @return void
+*/
+function set_post_views() {
+    global $post;
+    $count = 0;
+    $count_key = 'view_counter';
+
+    if($post){
+        $id = $post->ID;
+        $count = get_post_meta($id, $count_key, true);
+    }
+
+    if($count === ''){
+        delete_post_meta($id, $count_key);
+        add_post_meta($id, $count_key, '1');
+        }elseif( $count > 0 ){
+
+        // is_user_logged_in - 閲覧者がログイン済みか調べる
+        if(!is_user_logged_in()){ //管理者（自分）の閲覧を除外
+            $count++;
+
+            // update_post_meta - カスタムフィールド情報を更新する
+            update_post_meta($id, $count_key, $count);
+        }
+    }
+    //$countが0のままの場合（404や該当記事の検索結果が0件の場合）は何もしない。
+}
+add_action( 'template_redirect', 'set_post_views', 10 );
+
+//-------------------------------------------------------------------------------------------------------------------
+/**
+* 検索結果から固定ページを除外する
+* @param string $search SQLのWHERE句の検索条件文
+* @param object $wp_query WP_Queryのオブジェクト
+* @return string $search 条件追加後の検索条件文
+*/
+
+function my_posts_search( $search, $wp_query ){
+
+    // 検索結果ページ・メインクエリ・管理画面以外の3つの条件が揃った場合
+    // is_search - 検索結果ページか調べる。検索結果ページの場合はtrueを返す。
+    // is_main_query - 現在の投稿情報が最初に検索されたものか調べる
+    // is_admin - リクエストページが管理者ページ（/wp-admin/以下すべて）か調べる
+
+    if ( $wp_query->is_search() && $wp_query->is_main_query() && !is_admin() ){
+        // 検索結果を投稿タイプに絞る
+        $search .= " AND post_type = 'post' ";
+        return $search;
+    }
+    return $search;
+}
+// add_filter - フィルター関数を追加する
+// bool add_filter( string $tag, mixed $function_to_add [ , int $priority = 10 [ , int $accepted_args = 1 ] ] )
+// $tag             : WordPressシステムの関数名。
+// $function_to_add : フィルター関数名。メソッドを指定する場合は配列を使用する。
+// $priority        : プライオリティ値（省略時は10）。
+// $accepted_args   : フィルター関数のパラメータ数（省略時は1）。
+
+add_filter('posts_search','my_posts_search', 10, 2);
+
+
