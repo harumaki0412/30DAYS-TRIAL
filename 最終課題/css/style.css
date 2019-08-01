@@ -1,0 +1,236 @@
+@charset "UTF-8";
+/* --------------------------  リセットCSSはじめ -------------------------- */
+html, body, h1, h2, h3, h4, ul, ol, dl, li, dt, dd, p, div, span, img, a, table, tr, th, td {
+  color: #3E3E3E;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  font-size: 62.5%;
+  /* ベースの文字サイズを10pxに指定 */
+  vertical-align: baseline;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "游ゴシック体", "YuGothic";
+  /*Macの指定*/
+  /* font-family: "游ゴシック", "Yu Gothic"; */
+  line-height: 1.6;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  border: none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+a {
+  background: transparent;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+/* --------------------------  リセットCSSおわり -------------------------- */
+header {
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  z-index: 5;
+}
+
+header .inner {
+  margin: 0 auto;
+  max-width: 1366px;
+  padding: 31px 354px 30px 345px;
+}
+
+header .inner ul {
+  display: flex;
+}
+
+header .inner ul li {
+  padding-right: 40px;
+  height: 19px;
+}
+
+header .inner ul li a {
+  color: #3E3E3E;
+  font-size: 1.6rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 19px;
+}
+
+#hero {
+  background-image: url(/img/mv/mv.png);
+  background-size: cover;
+  height: 648px;
+}
+
+#hero > .inner {
+  display: flex;
+  justify-content: flex-end;
+  height: 648px;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 1366px;
+  padding: 220px 94px 164px 0;
+}
+
+#hero > .inner .first-page h1 {
+  color: #3E3E3E;
+  font-size: 3.0rem;
+  font-weight: bold;
+  height: 84px;
+  letter-spacing: 0px;
+  line-height: 1.4;
+  margin-bottom: 40px;
+  width: 420px;
+}
+
+#hero > .inner .first-page p {
+  color: #3E3E3E;
+  font-size: 1.8rem;
+  font-weight: lighter;
+  height: 49px;
+  letter-spacing: 0.45px;
+  line-height: 1.44;
+  margin-bottom: 40px;
+  width: 524px;
+}
+
+#hero > .inner .first-page .btn-contact {
+  background-color: #FFAA3B;
+  box-shadow: 0 3px 5px rgba(62, 62, 62, 0.2);
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 1.8rem;
+  height: 51px;
+  padding: 11px 48px;
+  width: 280px;
+}
+
+#hero > .inner .first-page .btn-contact a {
+  color: white;
+}
+
+#news {
+  background-color: #F3F3F3;
+}
+
+#news > .inner {
+  background-color: #F3F3F3;
+  margin: 0 auto;
+  padding: 130px 93px;
+  width: 1366px;
+}
+
+#news > .inner .news-contents {
+  background-color: #FFFFFF;
+  box-shadow: 0 5px 12px rgba(62, 62, 62, 0.2);
+  padding: 60px 50px 40px;
+}
+
+#news > .inner .news-contents .section-tittle {
+  font-size: 3.6rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 1.22;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  width: 103px;
+}
+
+#news > .inner .news-contents .news-content {
+  border-top: 1px solid #CECDCD;
+  display: flex;
+  height: 131px;
+  width: 1080px;
+}
+
+#news > .inner .news-contents .news-content .news-day {
+  padding: 0 60px 0 11px;
+  align-items: center;
+  display: flex;
+}
+
+#news > .inner .news-contents .news-content .news-day p {
+  font-size: 1.8rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+#news > .inner .news-contents .news-content .news-tittle {
+  align-items: center;
+  display: flex;
+  padding-right: 60px;
+}
+
+#news > .inner .news-contents .news-content .news-tittle a {
+  border: solid 2px #3B69FF;
+  border-radius: 50px;
+  color: #3E3E3E;
+  display: inline-block;
+  font-size: 1.4rem;
+  height: 28px;
+  line-height: 1;
+  padding: 5px 32px;
+  width: 125px;
+}
+
+#news > .inner .news-contents .news-content .news-heading {
+  align-items: center;
+  display: flex;
+  padding-right: 30px;
+  position: relative;
+  width: 697px;
+}
+
+#news > .inner .news-contents .news-content .news-heading::after {
+  content: url(/img/news-arrow.svg);
+  display: inline-block;
+  position: absolute;
+  right: -25px;
+  top: 53%;
+  transform: translateY(-50%);
+}
+
+#news > .inner .news-contents .news-content .news-heading a {
+  color: #3E3E3E;
+  display: inline-block;
+  font-size: 1.8rem;
+  letter-spacing: 0.48px;
+}
+
+#news > .inner .news-contents .news-custom-height {
+  height: 108px;
+}
+
+#news > .inner .news-contents .news-custom-border {
+  border-bottom: 1px solid #CECDCD;
+}
+
+#news > .inner .news-contents .btn-more {
+  padding-top: 40px;
+  text-align: center;
+}
+
+#news > .inner .news-contents .btn-more a {
+  border: solid 1px #707070;
+  color: #3E3E3E;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 550;
+  font-size: 2rem;
+  padding: 16px 83px;
+  letter-spacing: 4px;
+}
