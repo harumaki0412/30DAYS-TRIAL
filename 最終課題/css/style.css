@@ -848,6 +848,7 @@ header .inner ul li a {
   background-image: url(/img/contact1/contact1.png);
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: calc(978 / 960 * 100%) calc(218 / 196 * 100%);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   height: 200px;
   padding-top: 61.5px;
