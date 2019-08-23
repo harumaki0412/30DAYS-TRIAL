@@ -566,20 +566,23 @@ header .inner ul li a {
   line-height: 1.66;
 }
 
-#comments {
-  background-color: #F3F3F3;
+.bgWrapper {
   position: relative;
 }
 
-#comments::before {
+.bgWrapper::before {
   background-color: #3E3E3E;
   content: '';
-  height: 596px;
+  height: 2230px;
   position: absolute;
-  top: 151px;
-  right: 386px;
-  width: 100%;
+  top: 150px;
+  width: 71.8%;
   z-index: 10;
+}
+
+#comments {
+  background-color: #F3F3F3;
+  position: relative;
 }
 
 #comments > .inner {
@@ -654,6 +657,8 @@ header .inner ul li a {
 
 #faq {
   background: url(/img/sunyu-kim-1053375-unsplash/sunyu-kim-1053375-unsplash.png) center center/cover;
+  position: relative;
+  z-index: 20;
 }
 
 #faq > .inner {
@@ -743,4 +748,196 @@ header .inner ul li a {
 #faq > .inner .faq-contents .faq-list__item .faq-info .faq-answer__txt--ctm2 {
   height: 18px;
   line-height: 18px;
+}
+
+#faq > .inner .faq-contents .faq-list__item:last-child {
+  margin-bottom: 0;
+}
+
+#access {
+  background-color: #F3F3F3;
+  position: relative;
+}
+
+#access .inner {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1261px;
+  padding: 130px 40px;
+  position: relative;
+  width: 100%;
+  z-index: 20;
+}
+
+#access .inner .content-left {
+  flex-basis: 440px;
+  margin-right: 20px;
+}
+
+#access .inner .content-left__tittle {
+  color: #FFFFFF;
+  font-size: 3.6rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  height: 44px;
+  line-height: 1.22;
+  margin-bottom: 40px;
+}
+
+#access .inner .content-left__address {
+  margin-bottom: 40px;
+}
+
+#access .inner .content-left__address__txt {
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  height: 73px;
+  letter-spacing: 0;
+}
+
+#access .inner .content-left__btn {
+  max-width: 326px;
+  text-align: center;
+}
+
+#access .inner .content-left__btn__txt {
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  display: inline-block;
+  font-size: 2.0rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
+  line-height: 1.125;
+  padding: 20px 0;
+  width: 100%;
+}
+
+#access .inner .content-right {
+  flex-basis: 720px;
+  height: 515px;
+  margin-left: auto;
+}
+
+#access .inner .content-right__map {
+  width: 100%;
+  height: 100%;
+}
+
+#contact {
+  background: url(/img/alex-blajan-159378-unsplash/alex-blajan-159378-unsplash.png) center center/cover;
+  position: relative;
+}
+
+#contact .inner {
+  height: 1216px;
+  margin: 0 auto;
+  max-width: 1366px;
+  padding: 80px 203px 80.5px;
+  position: relative;
+  width: 100%;
+}
+
+#contact .inner .contact-contents {
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+#contact .inner .contact-contents .contact-head {
+  background-color: red;
+  background-image: url(/img/contact1/contact1.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  height: 200px;
+  padding-top: 61.5px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+#contact .inner .contact-contents .contact-head__tittle {
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.6rem;
+  font-weight: 500;
+  height: 44px;
+  line-height: 1.22;
+}
+
+#contact .inner .contact-contents .contact-head__txt {
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  height: 21px;
+  margin-top: 12px;
+  line-height: 1.3125;
+}
+
+#contact .inner .contact-contents .contact-body {
+  background-color: #FFFFFF;
+  padding: 60px 90px;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type {
+  display: flex;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-left {
+  margin-right: 99px;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-left__label {
+  color: #3E3E3E;
+  font-size: 2.2rem;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-right {
+  max-width: 261px;
+  height: 32px;
+  position: relative;
+  width: 100%;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-right:hover {
+  box-shadow: 0 0 5px #4973FF;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-right::after {
+  border-right: 2px solid #3e3e3e;
+  border-bottom: 2px solid #3e3e3e;
+  content: '';
+  color: #3E3E3E;
+  display: inline-block;
+  height: 7px;
+  position: absolute;
+  right: 10px;
+  transform: translateY(-50%) rotate(45deg);
+  top: 50%;
+  width: 7px;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-right__list {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid #707070;
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.8rem;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-right__list::-ms-expand {
+  /* select要素のデザインを無効にする（IE用） */
+  display: none;
+}
+
+#contact .inner .contact-contents .contact-body .contact-main .contact-type .contact-type-right__list:focus {
+  box-shadow: none;
+  outline: none;
 }
